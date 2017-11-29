@@ -1,0 +1,7 @@
+---
+# Test Playbook
+
+- name: Run test
+  hosts: plastron
+  roles:
+    - ping

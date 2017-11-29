@@ -1,0 +1,45 @@
+---
+# Housekeeping Playbook
+
+- name: Check Host
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: Check for log files
+      stat:
+        path: /var/log/httpd/access_log
+      register: access_log_exists
+    - name: Check for error log
+      stat:
+        path: /var/log/httpd/error_log
+      register: error_log_exists
+
+    - name: Debug message
+      debug:
+        msg: "Access Log Exists"
+      when: access_log_exists
+
+    - name: Copy Logs
+      copy:
+        src: /var/log/httpd/access_log
+        dest: /tmp/access_log
+        owner: root
+        remote_src: yes
+
+#    - name: Copy Logs Remote
+#      synchronize:
+#        src: /var/log/httpd/access_log
+#        dest: /tmp/access_log_test
+#        mode: push
+#        set_remote_user: ec2-user
+#      delegate_to: carapace
+
+
+
+#    - name: Create tarball
+#      archive:
+#        path:
+#          - /var/log/httpd/access_log
+#          - /var/log/httpd/error_log
+#        dest: /tmp/httpd_logs.tgz
+#      register: tarball_created

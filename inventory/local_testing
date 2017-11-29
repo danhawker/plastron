@@ -1,0 +1,8 @@
+[plastron]
+
+# Ansible Tower Host (plastron)
+#plastron ansible_host=ec2-35-176-166-165.eu-west-2.compute.amazonaws.com
+
+# Target Host (carapace)
+carapace ansible_host=52.56.180.146
+#carapace ansible_host=ec2-52-56-180-146.eu-west-2.compute.amazonaws.com
